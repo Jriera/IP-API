@@ -1,0 +1,44 @@
+{
+  "name": "image-processing-api",
+  "version": "1.0.0",
+  "description": "an API that can be used in two different ways. As a simple placeholder API, the first allows you to place images into your frontend with the size set via URL parameters ",
+  "main": "index.ts",
+  "scripts": {
+    "prettier": "prettier --write .",
+    "eslint": "eslint src/** --fix",
+    "build": "npx tsc",
+    "jasmine": "jasmine",
+    "test": "npm run build && npm run jasmine",
+    "start":"nodemon src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jriera/Image-Processing-API.git"
+  },
+  "author": "Jordi Riera",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jriera/Image-Processing-API/issues"
+  },
+  "homepage": "https://github.com/Jriera/Image-Processing-API#readme",
+  "devDependencies": {
+    "@types/eslint": "^7.28.0",
+    "@types/express": "^4.17.13",
+    "@types/jasmine": "^3.9.0",
+    "@types/node": "^16.7.10",
+    "@typescript-eslint/eslint-plugin": "^4.30.0",
+    "@typescript-eslint/parser": "^4.30.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "nodemon": "^2.0.12",
+    "prettier": "^2.3.2",
+    "tsc-node": "0.0.3",
+    "typescript": "^4.4.2"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "jasmine": "^3.9.0",
+    "jasmine-spec-reporter": "^7.0.0"
+  }
+}
