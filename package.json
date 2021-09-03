@@ -33,7 +33,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "nodemon": "^2.0.12",
     "prettier": "^2.3.2",
-    "tsc-node": "0.0.3",
+    "ts-node": "^10.2.1",
     "typescript": "^4.4.2"
   },
   "dependencies": {
