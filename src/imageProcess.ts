@@ -2,7 +2,7 @@ import sharp =require('sharp') ;
 
 
 
-const resizeImage =  (inFile:string,widthValue:number,heightValue:number,outFile:string):void  => {
+const resizeImage = async (inFile:string,widthValue:number,heightValue:number,outFile:string) => {
     
 	sharp(`assets/images/${inFile}`)
 		.resize({ width: widthValue,height:heightValue})

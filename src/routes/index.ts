@@ -1,33 +1,37 @@
 import express from 'express';
 import resizeImage from '../imageProcess';
 import path from "path";
-
-//import fileCheck from '../fileChecker';
+import fileCheck from '../fileChecker';
 
 const routes = express.Router();
 
-routes.get('/',async function (req,res){
+routes.get('/', (req,res)=>{
 
- 
-  
-  
    let filename=(req.query.filename as string);
    let endName =`assets/images/${filename}Resize.jpg`;
    let height=+(req.query.height as string );
    let width=+(req.query.width as string);
+    const promise = new Promise ((resolve,reject)=>{
+      resizeImage(`${filename}.jpg`,width,height,endName);
+      if(fileCheck(endName)) {
+          resolve ('file created successfully');
+      }
+      else {
+          reject('no file was created')}
 
-   try{resizeImage(`${filename}.jpg`,width,height,endName);
-    }catch(error){
-      console.log(error)
-    }
-setTimeout(() => {
-  try {res.sendFile(path.resolve(`./assets/images/${filename}Resize.jpg`));
-  } catch(error){
-    console.log(error)
-  }
-}, 1000);
-  
-         
+
+    }).then(()=>{
+       setTimeout(() => {
+        res.sendFile(path.resolve(`./assets/images/${filename}Resize.jpg`));
+       }, 100); 
+        
+    }).catch((error)=>{
+        console.log(error);
+    })
+
+    
+    
+       
   });
 
 export default routes; 
