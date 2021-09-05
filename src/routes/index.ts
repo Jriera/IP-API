@@ -22,6 +22,7 @@ routes.get('/', (req,res)=>{
 
 	}).then(()=>{
 		setTimeout(() => {
+            
 			res.sendFile(path.resolve(`./assets/images/${filename}Resize.jpg`));
 		}, 100); 
         
