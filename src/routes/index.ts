@@ -3,14 +3,16 @@ import resizeImage from '../imageProcess';
 import path from 'path';
 import fileCheck from '../fileChecker';
 
+
 const routes = express.Router();
 
 routes.get('/', (req,res)=>{
-
+    
 	const filename=(req.query.filename as string);
-	const endName =`assets/images/${filename}Resize.jpg`;
+	
 	const height=+(req.query.height as string );
 	const width=+(req.query.width as string);
+    const endName =`assets/thumbnails/${filename} ${width}x${height}.jpg`;
 	const promise = new Promise ((resolve,reject)=>{
 		resizeImage(`${filename}.jpg`,width,height,endName);
 		if(fileCheck(endName)) {
@@ -21,9 +23,9 @@ routes.get('/', (req,res)=>{
 
 
 	}).then(()=>{
+       
 		setTimeout(() => {
-            
-			res.sendFile(path.resolve(`./assets/images/${filename}Resize.jpg`));
+			res.sendFile(path.resolve(`./assets/thumbnails/${filename} ${width}x${height}.jpg`));
 		}, 100); 
         
 	}).catch((error)=>{
