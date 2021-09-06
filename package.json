@@ -11,7 +11,7 @@
     "test": "npm run build && npm run jasmine",
     "start": "nodemon src/index.ts",
     "typedoc":"typedoc src/index.ts",
-    "typedoc2":"typedoc --out docs/ --entryPoints src/ --entryPoints src/index.ts --entryPoints src/routes --entryPoints src/routes/index.ts"
+    "typedoc2":"typedoc --out docs/ --entryPoints src/ "
   },
   "repository": {
     "type": "git",
