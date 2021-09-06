@@ -6,7 +6,7 @@ import sharp = require('sharp');
  * @param widthValue This is the final width of the input image
  * @param heightValue This is the final height if the input image
  * @param outFile This is the path (and name) of the transformed image
-*/
+ */
 
 const resizeImage = async (
 	inFile: string,
