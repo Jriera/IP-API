@@ -4,7 +4,9 @@ import path from 'path';
 import fs from 'fs';
 
 const routes = express.Router();
-
+/**
+ * function get for the Router generated
+ */
 routes.get('/', (req, res) => {
 	const filename = req.query.filename as string;
 	const height = +(req.query.height as string);
