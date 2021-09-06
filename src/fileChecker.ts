@@ -1,19 +1,20 @@
-import {promises as fs} from 'fs';
-import {constants} from 'fs';
+import fs from 'fs';
+import { promises as fsPromises } from 'fs';
+import { constants } from 'fs';
 
-
-const fileCheck= (path:string) =>{
-
-	try {
-		fs.access(path, constants.F_OK | constants.R_OK);
-		console.log('can access');
-		return true;
-	} catch {
-		console.error('cannot access');
-		return false;
+/**
+ * @param filePath : string
+ * @description checks for the duration of 1 second
+ * for the existence of a file
+ */
+const watchFile = (filePath: string): boolean => {
+	const watchStartTime = Date.now();
+	while (!fs.existsSync(filePath)) {
+		if (Date.now() - watchStartTime > 1) {
+			return false;
+		}
 	}
-
+	return true;
 };
 
-
-export default fileCheck;
+export default watchFile;

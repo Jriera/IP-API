@@ -1,37 +1,33 @@
 import express from 'express';
 import resizeImage from '../imageProcess';
 import path from 'path';
-import fileCheck from '../fileChecker';
+import fs from 'fs';
 
 const routes = express.Router();
+/**
+ * function get for the Router generated
+ */
+routes.get('/', (req, res) => {
+	const filename = req.query.filename as string;
+	const height = +(req.query.height as string);
+	const width = +(req.query.width as string);
+	const endName = `assets/thumbnails/${filename} ${width}x${height}.jpg`;
 
-routes.get('/', (req,res)=>{
+	if (fs.existsSync(endName)) {
+		res.sendFile(
+			path.resolve(`./assets/thumbnails/${filename} ${width}x${height}.jpg`)
+		);
+		console.log('serving cached image');
+	} else {
+		resizeImage(`${filename}.jpg`, width, height, endName);
 
-	const filename=(req.query.filename as string);
-	const endName =`assets/images/${filename}Resize.jpg`;
-	const height=+(req.query.height as string );
-	const width=+(req.query.width as string);
-	const promise = new Promise ((resolve,reject)=>{
-		resizeImage(`${filename}.jpg`,width,height,endName);
-		if(fileCheck(endName)) {
-			resolve ('file created successfully');
-		}
-		else {
-			reject('no file was created');}
-
-
-	}).then(()=>{
 		setTimeout(() => {
-			res.sendFile(path.resolve(`./assets/images/${filename}Resize.jpg`));
-		}, 100); 
-        
-	}).catch((error)=>{
-		console.log(error);
-	});
-
-    
-    
-       
+			res.sendFile(
+				path.resolve(`./assets/thumbnails/${filename} ${width}x${height}.jpg`)
+			);
+		}, 100);
+		console.log('new image generated');
+	}
 });
 
-export default routes; 
+export default routes;
