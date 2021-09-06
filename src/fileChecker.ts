@@ -1,9 +1,7 @@
-import {promises as fs} from 'fs';
-import {constants} from 'fs';
+import { promises as fs } from 'fs';
+import { constants } from 'fs';
 
-
-const fileCheck= (path:string) =>{
-
+const fileCheck = (path: string) => {
 	try {
 		fs.access(path, constants.F_OK | constants.R_OK);
 		console.log('can access');
@@ -12,8 +10,6 @@ const fileCheck= (path:string) =>{
 		console.error('cannot access');
 		return false;
 	}
-
 };
-
 
 export default fileCheck;
