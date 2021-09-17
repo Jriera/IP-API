@@ -8,13 +8,13 @@ import { constants } from 'fs';
  * for the existence of a file
  */
 const watchFile = (filePath: string): boolean => {
-	const watchStartTime = Date.now();
-	while (!fs.existsSync(filePath)) {
-		if (Date.now() - watchStartTime > 1) {
-			return false;
-		}
-	}
-	return true;
+    const watchStartTime = Date.now();
+    while (!fs.existsSync(filePath)) {
+        if (Date.now() - watchStartTime > 1) {
+            return false;
+        }
+    }
+    return true;
 };
 
 export default watchFile;

@@ -6,6 +6,6 @@ import imageMiddleware from '../imageMiddleware';
 
 const routes = express.Router();
 
-routes.get('/',imageMiddleware);
+routes.get('/', imageMiddleware);
 
 export default routes;
