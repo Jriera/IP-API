@@ -1,13 +1,11 @@
-'use strict';
-var __importDefault =
-  (this && this.__importDefault) ||
-  function (mod) {
-      return mod && mod.__esModule ? mod : { default: mod };
-  };
-Object.defineProperty(exports, '__esModule', { value: true });
-const imageProcess_1 = __importDefault(require('./imageProcess'));
-const path_1 = __importDefault(require('path'));
-const fs_1 = __importDefault(require('fs'));
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const imageProcess_1 = __importDefault(require("./imageProcess"));
+const path_1 = __importDefault(require("path"));
+const fs_1 = __importDefault(require("fs"));
 class AnImage {
     constructor() {
         this.filename = '';
@@ -33,25 +31,13 @@ const imageMiddleware = (req, res) => {
     modifyImage.width = +req.query.width;
     modifyImage.location = `assets/thumbnails/${modifyImage.filename} ${modifyImage.width}x${modifyImage.height}.jpg`;
     if (fs_1.default.existsSync(modifyImage.location)) {
-        res.sendFile(
-            path_1.default.resolve(
-                `./assets/thumbnails/${modifyImage.filename} ${modifyImage.width}x${modifyImage.height}.jpg`
-            )
-        );
+        res.sendFile(path_1.default.resolve(`./assets/thumbnails/${modifyImage.filename} ${modifyImage.width}x${modifyImage.height}.jpg`));
         console.log('serving cached image');
-    } else {
-        (0, imageProcess_1.default)(
-            `${modifyImage.filename}.jpg`,
-            modifyImage.width,
-            modifyImage.height,
-            modifyImage.location
-        );
+    }
+    else {
+        (0, imageProcess_1.default)(`${modifyImage.filename}.jpg`, modifyImage.width, modifyImage.height, modifyImage.location);
         setTimeout(() => {
-            res.sendFile(
-                path_1.default.resolve(
-                    `./assets/thumbnails/${modifyImage.filename} ${modifyImage.width}x${modifyImage.height}.jpg`
-                )
-            );
+            res.sendFile(path_1.default.resolve(`./assets/thumbnails/${modifyImage.filename} ${modifyImage.width}x${modifyImage.height}.jpg`));
         }, 100);
         console.log('new image generated');
     }

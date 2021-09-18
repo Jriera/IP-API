@@ -15,7 +15,7 @@ const resizeImage = async (
     heightValue: number,
     outFile: string
 ) => {
-    await sharp(`assets/images/${inFile}`)
+         sharp(`assets/images/${inFile}`)
         .resize({ width: widthValue, height: heightValue })
         .jpeg()
         .toFile(outFile, (err, info) => {
