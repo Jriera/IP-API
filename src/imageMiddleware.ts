@@ -30,6 +30,9 @@ const imageMiddleware = (req: Request, res: Response) => {
 		modifyImage.location = `assets/thumbnails/${modifyImage.filename} ${modifyImage.width}x${modifyImage.height}.jpg`;
 		if( typeof((modifyImage.filename))!='string'){
 			res.send('check your image info');
+			modifyImage.width=1;
+			modifyImage.height=1;
+
 		}
 		if (fs.existsSync(modifyImage.location)) {
 			res.sendFile(
