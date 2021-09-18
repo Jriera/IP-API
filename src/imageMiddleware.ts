@@ -21,7 +21,7 @@ class AnImage {
  * but sent to client via the res.sendFile property from Response parameter
  */
 
-const imageMiddleware = (req: Request, res: Response) => {
+const imageMiddleware = async (req: Request, res: Response) => {
 	try {
 		const modifyImage = new AnImage();
 		modifyImage.filename = req.query.filename as string;
@@ -42,12 +42,14 @@ const imageMiddleware = (req: Request, res: Response) => {
 			);
 			console.log('serving cached image');
 		} else {
-			resizeImage(
+			await resizeImage(
 				`${modifyImage.filename}.jpg`,
 				modifyImage.width,
 				modifyImage.height,
 				modifyImage.location
 			);
+
+			
 	
 			setTimeout(() => {
 				res.sendFile(

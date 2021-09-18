@@ -7,7 +7,7 @@ const statusGetter = async (url:string)=>{
     return serverCode;
 }
 
-describe('server running correctly',()=>{
+describe('Confirm that server and endpoint are reachable',()=>{
     it('checks if the server is up',async ()=>{
       
      
