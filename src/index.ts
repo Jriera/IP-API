@@ -13,6 +13,6 @@ app.use(express.static('Public'));
 
 
 //server initilize on port 3000;
-app.listen(port, () => {
+app.listen(process.ENV.PORT || port, () => {
     console.log(`server running on localhost:${port}`);
 });
