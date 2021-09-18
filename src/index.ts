@@ -10,7 +10,9 @@ app.use('/api', routes);
 
 app.use(express.static('Public'));
 
+
+
 //server initilize on port 3000;
 app.listen(port, () => {
-	console.log(`server running on localhost:${port}`);
+    console.log(`server running on localhost:${port}`);
 });

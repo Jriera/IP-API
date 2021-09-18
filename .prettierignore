@@ -4,5 +4,6 @@ tsconfig.json
 package.json
 prettierrc.json
 package-lock.json
+/dist
 
 

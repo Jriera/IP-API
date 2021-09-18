@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>fileChecker | image-processing-api</title>
+    <title>imageMiddleware | image-processing-api</title>
     <meta name="description" content="Documentation for image-processing-api" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="../assets/css/main.css" />
@@ -75,10 +75,10 @@
               <a href="../modules.html">image-processing-api</a>
             </li>
             <li>
-              <a href="fileChecker.html">fileChecker</a>
+              <a href="imageMiddleware.html">imageMiddleware</a>
             </li>
           </ul>
-          <h1>Module fileChecker</h1>
+          <h1>Module imageMiddleware</h1>
         </div>
       </div>
     </header>
@@ -93,7 +93,9 @@
                   <h3>Functions</h3>
                   <ul class="tsd-index-list">
                     <li class="tsd-kind-function tsd-parent-kind-module">
-                      <a href="fileChecker.html#default" class="tsd-kind-icon"
+                      <a
+                        href="imageMiddleware.html#default"
+                        class="tsd-kind-icon"
                         >default</a
                       >
                     </li>
@@ -115,12 +117,42 @@
                 class="tsd-signatures tsd-kind-function tsd-parent-kind-module"
               >
                 <li class="tsd-signature tsd-kind-icon">
-                  default<span class="tsd-signature-symbol">(</span
-                  >filePath<span class="tsd-signature-symbol">: </span
+                  default<span class="tsd-signature-symbol">(</span>req<span
+                    class="tsd-signature-symbol"
+                    >: </span
+                  ><span class="tsd-signature-type">Request</span
+                  ><span class="tsd-signature-symbol">&lt;</span
+                  ><span class="tsd-signature-type">ParamsDictionary</span
+                  ><span class="tsd-signature-symbol">, </span
+                  ><span class="tsd-signature-type">any</span
+                  ><span class="tsd-signature-symbol">, </span
+                  ><span class="tsd-signature-type">any</span
+                  ><span class="tsd-signature-symbol">, </span
+                  ><span class="tsd-signature-type">ParsedQs</span
+                  ><span class="tsd-signature-symbol">, </span
+                  ><span class="tsd-signature-type">Record</span
+                  ><span class="tsd-signature-symbol">&lt;</span
                   ><span class="tsd-signature-type">string</span
+                  ><span class="tsd-signature-symbol">, </span
+                  ><span class="tsd-signature-type">any</span
+                  ><span class="tsd-signature-symbol">&gt;</span
+                  ><span class="tsd-signature-symbol">&gt;</span>, res<span
+                    class="tsd-signature-symbol"
+                    >: </span
+                  ><span class="tsd-signature-type">Response</span
+                  ><span class="tsd-signature-symbol">&lt;</span
+                  ><span class="tsd-signature-type">any</span
+                  ><span class="tsd-signature-symbol">, </span
+                  ><span class="tsd-signature-type">Record</span
+                  ><span class="tsd-signature-symbol">&lt;</span
+                  ><span class="tsd-signature-type">string</span
+                  ><span class="tsd-signature-symbol">, </span
+                  ><span class="tsd-signature-type">any</span
+                  ><span class="tsd-signature-symbol">&gt;</span
+                  ><span class="tsd-signature-symbol">&gt;</span
                   ><span class="tsd-signature-symbol">)</span
                   ><span class="tsd-signature-symbol">: </span
-                  ><span class="tsd-signature-type">boolean</span>
+                  ><span class="tsd-signature-type">void</span>
                 </li>
               </ul>
               <ul class="tsd-descriptions">
@@ -130,8 +162,8 @@
                       <li>
                         Defined in
                         <a
-                          href="https://github.com/Jriera/IP-API/blob/58ce63a/src/fileChecker.ts#L10"
-                          >fileChecker.ts:10</a
+                          href="https://github.com/Jriera/IP-API/blob/58ce63a/src/imageMiddleware.ts#L29"
+                          >imageMiddleware.ts:29</a
                         >
                       </li>
                     </ul>
@@ -141,8 +173,22 @@
                       <dt>description</dt>
                       <dd>
                         <p>
-                          checks for the duration of 1 second for the existence
-                          of a file
+                          performs the main work in the image prcess. It creates
+                          an image object and assings its properties from the
+                          url that calls this middleware. If the image created
+                          exists already the module sends the stored image
+                          instead of generating a new one. If the image object
+                          instance does not exist, it passes it into the
+                          imageProcess module and creates the new image and
+                          sends it to the client afterwards
+                        </p>
+                      </dd>
+                      <dt>returns:void</dt>
+                      <dd>
+                        <p>
+                          Nothing is return since the image generated is not
+                          returned by the module but sent to client via the
+                          res.sendFile property from Response parameter
                         </p>
                       </dd>
                     </dl>
@@ -151,15 +197,49 @@
                   <ul class="tsd-parameters">
                     <li>
                       <h5>
-                        filePath: <span class="tsd-signature-type">string</span>
+                        req: <span class="tsd-signature-type">Request</span
+                        ><span class="tsd-signature-symbol">&lt;</span
+                        ><span class="tsd-signature-type">ParamsDictionary</span
+                        ><span class="tsd-signature-symbol">, </span
+                        ><span class="tsd-signature-type">any</span
+                        ><span class="tsd-signature-symbol">, </span
+                        ><span class="tsd-signature-type">any</span
+                        ><span class="tsd-signature-symbol">, </span
+                        ><span class="tsd-signature-type">ParsedQs</span
+                        ><span class="tsd-signature-symbol">, </span
+                        ><span class="tsd-signature-type">Record</span
+                        ><span class="tsd-signature-symbol">&lt;</span
+                        ><span class="tsd-signature-type">string</span
+                        ><span class="tsd-signature-symbol">, </span
+                        ><span class="tsd-signature-type">any</span
+                        ><span class="tsd-signature-symbol">&gt;</span
+                        ><span class="tsd-signature-symbol">&gt;</span>
                       </h5>
                       <div class="tsd-comment tsd-typography">
-                        <p>: string</p>
+                        <p>Takes the requests sent to the server</p>
+                      </div>
+                    </li>
+                    <li>
+                      <h5>
+                        res: <span class="tsd-signature-type">Response</span
+                        ><span class="tsd-signature-symbol">&lt;</span
+                        ><span class="tsd-signature-type">any</span
+                        ><span class="tsd-signature-symbol">, </span
+                        ><span class="tsd-signature-type">Record</span
+                        ><span class="tsd-signature-symbol">&lt;</span
+                        ><span class="tsd-signature-type">string</span
+                        ><span class="tsd-signature-symbol">, </span
+                        ><span class="tsd-signature-type">any</span
+                        ><span class="tsd-signature-symbol">&gt;</span
+                        ><span class="tsd-signature-symbol">&gt;</span>
+                      </h5>
+                      <div class="tsd-comment tsd-typography">
+                        <p>Sends the responses from the server</p>
                       </div>
                     </li>
                   </ul>
                   <h4 class="tsd-returns-title">
-                    Returns <span class="tsd-signature-type">boolean</span>
+                    Returns <span class="tsd-signature-type">void</span>
                   </h4>
                 </li>
               </ul>
@@ -172,10 +252,10 @@
               <li class="">
                 <a href="../modules.html">Modules</a>
               </li>
-              <li class="current tsd-kind-module">
+              <li class="tsd-kind-module">
                 <a href="fileChecker.html">file<wbr />Checker</a>
               </li>
-              <li class="tsd-kind-module">
+              <li class="current tsd-kind-module">
                 <a href="imageMiddleware.html">image<wbr />Middleware</a>
               </li>
               <li class="tsd-kind-module">
@@ -189,7 +269,7 @@
           <nav class="tsd-navigation secondary menu-sticky">
             <ul class="before-current">
               <li class="tsd-kind-function tsd-parent-kind-module">
-                <a href="fileChecker.html#default" class="tsd-kind-icon"
+                <a href="imageMiddleware.html#default" class="tsd-kind-icon"
                   >default</a
                 >
               </li>

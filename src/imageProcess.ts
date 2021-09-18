@@ -1,6 +1,7 @@
 import sharp = require('sharp');
 
-/** Function that resizes an input image and outputs it
+/**
+ * @description Function that resizes an input image and outputs it
  * with the dimensions specified in the parameters
  * @param inFile This is the name of the input image
  * @param widthValue This is the final width of the input image
@@ -9,18 +10,18 @@ import sharp = require('sharp');
  */
 
 const resizeImage = async (
-	inFile: string,
-	widthValue: number,
-	heightValue: number,
-	outFile: string
+    inFile: string,
+    widthValue: number,
+    heightValue: number,
+    outFile: string
 ) => {
-	sharp(`assets/images/${inFile}`)
-		.resize({ width: widthValue, height: heightValue })
-		.jpeg()
-		.toFile(outFile, (err, info) => {
-			console.log(info);
-			console.log(err);
-		});
+         sharp(`assets/images/${inFile}`)
+        .resize({ width: widthValue, height: heightValue })
+        .jpeg()
+        .toFile(outFile, (err, info) => {
+            console.log(info);
+            console.log(err);
+        });
 };
 
 export default resizeImage;
