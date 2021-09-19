@@ -40,7 +40,7 @@ const imageMiddleware = (req, res) => __awaiter(void 0, void 0, void 0, function
         modifyImage.height = +req.query.height;
         modifyImage.width = +req.query.width;
         modifyImage.location = `assets/thumbnails/${modifyImage.filename} ${modifyImage.width}x${modifyImage.height}.jpg`;
-        if (typeof ((modifyImage.filename)) != 'string') {
+        if (typeof modifyImage.filename != 'string') {
             res.send('check your image info');
             modifyImage.width = 1;
             modifyImage.height = 1;
