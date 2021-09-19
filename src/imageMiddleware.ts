@@ -22,49 +22,45 @@ class AnImage {
  */
 
 const imageMiddleware = async (req: Request, res: Response) => {
-	try {
-		const modifyImage = new AnImage();
-		modifyImage.filename = req.query.filename as string;
-		modifyImage.height = +(req.query.height as string);
-		modifyImage.width = +(req.query.width as string);
-		modifyImage.location = `assets/thumbnails/${modifyImage.filename} ${modifyImage.width}x${modifyImage.height}.jpg`;
-		if( typeof((modifyImage.filename))!='string'){
-			res.send('check your image info');
-			modifyImage.width=1;
-			modifyImage.height=1;
+    try {
+        const modifyImage = new AnImage();
+        modifyImage.filename = req.query.filename as string;
+        modifyImage.height = +(req.query.height as string);
+        modifyImage.width = +(req.query.width as string);
+        modifyImage.location = `assets/thumbnails/${modifyImage.filename} ${modifyImage.width}x${modifyImage.height}.jpg`;
+        if (typeof modifyImage.filename != 'string') {
+            res.send('check your image info');
+            modifyImage.width = 1;
+            modifyImage.height = 1;
+        }
+        if (fs.existsSync(modifyImage.location)) {
+            res.sendFile(
+                path.resolve(
+                    `./assets/thumbnails/${modifyImage.filename} ${modifyImage.width}x${modifyImage.height}.jpg`
+                )
+            );
+            console.log('serving cached image');
+        } else {
+            resizeImage(
+                `${modifyImage.filename}.jpg`,
+                modifyImage.width,
+                modifyImage.height,
+                modifyImage.location
+            );
 
-		}
-		if (fs.existsSync(modifyImage.location)) {
-			res.sendFile(
-				path.resolve(
-					`./assets/thumbnails/${modifyImage.filename} ${modifyImage.width}x${modifyImage.height}.jpg`
-				)
-			);
-			console.log('serving cached image');
-		} else {
-			 resizeImage(
-				`${modifyImage.filename}.jpg`,
-				modifyImage.width,
-				modifyImage.height,
-				modifyImage.location
-			);
-
-			
-	
-			setTimeout(() => {
-				res.sendFile(
-					path.resolve(
-						`./assets/thumbnails/${modifyImage.filename} ${modifyImage.width}x${modifyImage.height}.jpg`
-					)
-				);
-			}, 100);
-			console.log('new image generated');
-		}
-	} catch (err) {
-		return res.status(404).send({ message: 'Route'+req.url+' Not found.' });
-		console.log(err);
-	}
-   
+            setTimeout(() => {
+                res.sendFile(
+                    path.resolve(
+                        `./assets/thumbnails/${modifyImage.filename} ${modifyImage.width}x${modifyImage.height}.jpg`
+                    )
+                );
+            }, 100);
+            console.log('new image generated');
+        }
+    } catch (err) {
+        return res.status(404).send({ message: 'Route' + req.url + ' Not found.' });
+        console.log(err);
+    }
 };
 
 export default imageMiddleware;

@@ -4,16 +4,14 @@
 
 1: To provide a fast reliable image resizing without needing to upload extra variations of the same image via a URL query</br>
 2: Allow for the usage of the URL as placeholder in code (such as inside and img.src) without needing to upload the image in the needed sizes and formats
+
 </p>
 
 ## Links
 
 - [Repo](https://github.com/Jriera/IP-API" "Repo")
 
-
 - [Bugs](https://github.com/Jriera/IP-API/issues "Issues Page")
-
-
 
 ## Screenshots
 
@@ -27,7 +25,7 @@
 
 In the project directory, you can run:
 
-### `npm run start" 
+### `npm run start"
 
 The command will run 'node index.js which will start the express app on localhost:3000. Open [http://localhost:3000/api](http://localhost:3000/api) and append the query with the image filename and dimensions needed. for instance
 http://localhost:3000/api?filename=fjord&width=350&height=291. To get the image fjord in the size of 350x291
@@ -42,9 +40,7 @@ Launches a build and jasmine to run the tests
 
 ### `"npm run nodemon"
 
-For running the developement version of the app 
-
-
+For running the developement version of the app
 
 ## Built With
 

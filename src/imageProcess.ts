@@ -9,13 +9,13 @@ import sharp = require('sharp');
  * @param outFile This is the path (and name) of the transformed image
  */
 
-const resizeImage =  (
+const resizeImage = (
     inFile: string,
     widthValue: number,
     heightValue: number,
     outFile: string
 ) => {
-         sharp(`assets/images/${inFile}`)
+    sharp(`assets/images/${inFile}`)
         .resize({ width: widthValue, height: heightValue })
         .jpeg()
         .toFile(outFile, (err, info) => {
