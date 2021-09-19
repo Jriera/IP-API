@@ -18,10 +18,7 @@ const node_fetch_1 = (...args) => import('node-fetch').then(({default: fetch}) =
 
 const fs_1 = __importDefault(require("fs"));
 
-const codeGetter = async (url) =>  {
-    const serverCode = await node_fetch_1(url).status;
-    return serverCode;
-};
+
 const url = 'http://localhost:3000/api?filename=palmtunnel&width=350&height=291';
 const outputFile = 'assets/thumbnails/palmtunnel 350x291.jpg';
 describe('Confirm that when an Image is requested a resized image is returned', () => {
