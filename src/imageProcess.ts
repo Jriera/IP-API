@@ -9,7 +9,7 @@ import sharp = require('sharp');
  * @param outFile This is the path (and name) of the transformed image
  */
 
-const resizeImage = async (
+const resizeImage =  (
     inFile: string,
     widthValue: number,
     heightValue: number,

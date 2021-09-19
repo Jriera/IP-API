@@ -42,7 +42,7 @@ const imageMiddleware = async (req: Request, res: Response) => {
 			);
 			console.log('serving cached image');
 		} else {
-			await resizeImage(
+			 resizeImage(
 				`${modifyImage.filename}.jpg`,
 				modifyImage.width,
 				modifyImage.height,
