@@ -1,9 +1,9 @@
 <h1 align="center">Image Processing API</h1>
 
-<p align="center">< The main functions of this project are:</br>
+<p align="left"> The main functions of this project are:</br>
 1:To provide a fast reliable image resizing without needing to upload extra variations of the same image via a URL query</br>
 2:Allow for the usage of the URL as placeholder in code (such as inside and img.src) without needing to upload the image in the needed sizes and formats
-></p>
+</p>
 
 ## Links
 
