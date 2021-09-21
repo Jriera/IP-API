@@ -27,16 +27,28 @@ const imageMiddleware = async (req: Request, res: Response):Promise<void> => {
         modifyImage.filename = req.query.filename as string;
         modifyImage.height = +(req.query.height as string);
         modifyImage.width = +(req.query.width as string);
-        modifyImage.location = `assets/thumbnails/${modifyImage.filename} ${modifyImage.width}x${modifyImage.height}.jpg`;
+        modifyImage.location = `assets/thumbnails/${modifyImage.filename}_${modifyImage.width}x${modifyImage.height}.jpg`;
         if (typeof modifyImage.filename != 'string') {
-            res.send('check your image info');
+            res.send('Your image name should be a string');
+            modifyImage.width = 1;
+            modifyImage.height = 1;
+        }
+
+        if((Number.isNaN(modifyImage.width)===true)||modifyImage.width<=0){
+            res.send('Your width is not a valid value. It must be a positive integer')
+            modifyImage.width = 1;
+            modifyImage.height = 1;
+        }
+
+        if((Number.isNaN(modifyImage.height)===true)||modifyImage.height<=0){
+            res.send('Your height is not a valid value. It must be a positive integer')
             modifyImage.width = 1;
             modifyImage.height = 1;
         }
         if (fs.existsSync(modifyImage.location)) {
             res.sendFile(
                 path.resolve(
-                    `./assets/thumbnails/${modifyImage.filename} ${modifyImage.width}x${modifyImage.height}.jpg`
+                    `./assets/thumbnails/${modifyImage.filename}_${modifyImage.width}x${modifyImage.height}.jpg`
                 )
             );
             console.log('serving cached image');
@@ -51,7 +63,7 @@ const imageMiddleware = async (req: Request, res: Response):Promise<void> => {
             setTimeout(() => {
                 res.sendFile(
                     path.resolve(
-                        `./assets/thumbnails/${modifyImage.filename} ${modifyImage.width}x${modifyImage.height}.jpg`
+                        `./assets/thumbnails/${modifyImage.filename}_${modifyImage.width}x${modifyImage.height}.jpg`
                     )
                 );
             }, 100);
