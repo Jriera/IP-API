@@ -11,10 +11,10 @@ const coder = async (endpoint) => {
     return code;
 };
 describe('Confirm that server and endpoint are reachable', () => {
-    it('checks if the server is up', async () => {
+    it('Should return Ok status for server', async () => {
         expect(await coder('/')).toEqual(200);
     });
-    it('checks the endpoint is up', async () => {
+    it('Should return OK status for endpoint', async () => {
         expect(await coder('/api')).toEqual(200);
     });
 });
