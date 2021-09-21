@@ -32,6 +32,7 @@ const imageMiddleware = async (req: Request, res: Response):Promise<void> => {
             res.send('Your image name should be a string');
             modifyImage.width = 1;
             modifyImage.height = 1;
+            
         }
 
         if((Number.isNaN(modifyImage.width)===true)||modifyImage.width<=0){
