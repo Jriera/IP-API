@@ -21,7 +21,7 @@ class AnImage {
  * but sent to client via the res.sendFile property from Response parameter
  */
 
-const imageMiddleware = async (req: Request, res: Response) => {
+const imageMiddleware = async (req: Request, res: Response):Promise<void> => {
     try {
         const modifyImage = new AnImage();
         modifyImage.filename = req.query.filename as string;
@@ -41,7 +41,7 @@ const imageMiddleware = async (req: Request, res: Response) => {
             );
             console.log('serving cached image');
         } else {
-            resizeImage(
+            await resizeImage(
                 `${modifyImage.filename}.jpg`,
                 modifyImage.width,
                 modifyImage.height,
@@ -58,7 +58,7 @@ const imageMiddleware = async (req: Request, res: Response) => {
             console.log('new image generated');
         }
     } catch (err) {
-        return res.status(404).send({ message: 'Route' + req.url + ' Not found.' });
+        
         console.log(err);
     }
 };
