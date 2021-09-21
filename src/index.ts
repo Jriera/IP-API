@@ -17,3 +17,4 @@ app.use(express.static('Public'));
 app.listen(process.env.PORT || port, () => {
     console.log(`server running on localhost:${port}`);
 });
+export default app;
