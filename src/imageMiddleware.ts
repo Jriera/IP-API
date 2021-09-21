@@ -21,7 +21,7 @@ class AnImage {
  * but sent to client via the res.sendFile property from Response parameter
  */
 
-const imageMiddleware = async (req: Request, res: Response):Promise<void> => {
+const imageMiddleware = async (req: Request, res: Response): Promise<void> => {
     try {
         const modifyImage = new AnImage();
         modifyImage.filename = req.query.filename as string;
@@ -32,26 +32,25 @@ const imageMiddleware = async (req: Request, res: Response):Promise<void> => {
             res.send('Your image name should be a string');
             modifyImage.width = 1;
             modifyImage.height = 1;
-            
         }
 
-        if((Number.isNaN(modifyImage.width)===true)||modifyImage.width<=0){
-            res.send('Your width is not a valid value. It must be a positive integer')
+        if (Number.isNaN(modifyImage.width) === true || modifyImage.width <= 0) {
+            res.send(
+                'Your width is not a valid value. It must be a positive integer'
+            );
             modifyImage.width = 1;
             modifyImage.height = 1;
         }
 
-        if((Number.isNaN(modifyImage.height)===true)||modifyImage.height<=0){
-            res.send('Your height is not a valid value. It must be a positive integer')
+        if (Number.isNaN(modifyImage.height) === true || modifyImage.height <= 0) {
+            res.send(
+                'Your height is not a valid value. It must be a positive integer'
+            );
             modifyImage.width = 1;
             modifyImage.height = 1;
         }
         if (fs.existsSync(modifyImage.location)) {
-            res.sendFile(
-                path.resolve(
-                   modifyImage.location
-                )
-            );
+            res.sendFile(path.resolve(modifyImage.location));
             console.log('serving cached image');
         } else {
             await resizeImage(
@@ -62,16 +61,11 @@ const imageMiddleware = async (req: Request, res: Response):Promise<void> => {
             );
 
             setTimeout(() => {
-                res.sendFile(
-                    path.resolve(
-                        modifyImage.location
-                    )
-                );
+                res.sendFile(path.resolve(modifyImage.location));
             }, 100);
             console.log('new image generated');
         }
     } catch (err) {
-        
         console.log(err);
     }
 };

@@ -14,7 +14,7 @@ const resizeImage = async (
     widthValue: number,
     heightValue: number,
     outFile: string
-):Promise<void> => {
+): Promise<void> => {
     sharp(`assets/images/${inFile}`)
         .resize({ width: widthValue, height: heightValue })
         .jpeg()
