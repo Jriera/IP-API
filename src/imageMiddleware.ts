@@ -3,12 +3,7 @@ import resizeImage from './imageProcess';
 import path from 'path';
 import fs from 'fs';
 
-class AnImage {
-  filename = '';
-  width = 0;
-  height = 0;
-  location = '';
-}
+
 
 /**
  * @param req Takes the requests sent to the server
@@ -23,45 +18,45 @@ class AnImage {
 
 const imageMiddleware = async (req: Request, res: Response): Promise<void> => {
     try {
-        const modifyImage = new AnImage();
-        modifyImage.filename = req.query.filename as string;
-        modifyImage.height = +(req.query.height as string);
-        modifyImage.width = +(req.query.width as string);
-        modifyImage.location = `./assets/thumbnails/${modifyImage.filename}_${modifyImage.width}x${modifyImage.height}.jpg`;
-        if (typeof modifyImage.filename != 'string') {
+        
+        const filename = req.query.filename as string;
+        let height = +(req.query.height as string);
+        let width = +(req.query.width as string);
+        const location = `./assets/thumbnails/${filename}_${width}x${height}.jpg`;
+        if (typeof filename != 'string') {
             res.send('Your image name should be a string');
-            modifyImage.width = 1;
-            modifyImage.height = 1;
+            width = 1;
+            height = 1;
         }
 
-        if (Number.isNaN(modifyImage.width) === true || modifyImage.width <= 0) {
+        if (Number.isNaN(width) === true || width <= 0) {
             res.send(
                 'Your width is not a valid value. It must be a positive integer'
             );
-            modifyImage.width = 1;
-            modifyImage.height = 1;
+            width = 1;
+            height = 1;
         }
 
-        if (Number.isNaN(modifyImage.height) === true || modifyImage.height <= 0) {
+        if (Number.isNaN(height) === true || height <= 0) {
             res.send(
                 'Your height is not a valid value. It must be a positive integer'
             );
-            modifyImage.width = 1;
-            modifyImage.height = 1;
+            width = 1;
+            height = 1;
         }
-        if (fs.existsSync(modifyImage.location)) {
-            res.sendFile(path.resolve(modifyImage.location));
+        if (fs.existsSync(location)) {
+            res.sendFile(path.resolve(location));
             console.log('serving cached image');
         } else {
             await resizeImage(
-                `${modifyImage.filename}.jpg`,
-                modifyImage.width,
-                modifyImage.height,
-                modifyImage.location
+                `${filename}.jpg`,
+                width,
+                height,
+                location
             );
 
             setTimeout(() => {
-                res.sendFile(path.resolve(modifyImage.location));
+                res.sendFile(path.resolve(location));
             }, 100);
             console.log('new image generated');
         }
